@@ -20,6 +20,20 @@ class Adult(object):
         
         with open('datasets/Adult/valid') as f: data = f.read()
         self.valid = [row.split(', ') for row in data.split('\n')]
+        
+class Glove(object):
+    def __init__(self, which, limit=None):
+        with open('datasets/glove.6B/glove.6B.{}d.txt'.format(which), 'r') as f:
+             self.words, self.embeddings = zip(*[self.__split_word_vec(f.readline()) for n in range(limit)])
+        self.words = list(self.words)
+        self.embeddings = np.array(self.embeddings)
+        
+    def __split_word_vec(self, lines):
+        split = lines[:-1].split(' ')
+        return split[0], np.array(split[1:], dtype=float)
+        
+    def __getitem__(self, item):
+        return self.words.__getitem__(item), self.embeddings.__getitem__(item)
 
 class NCEI(object):
     def __init__(self, user, password):
