@@ -22,6 +22,6 @@
 * Adult: `cp path/to/Adult path/to/datasets`
 * NCEI: (~5 minutes)
   ```
-  unzip NCEI.sql.zip NCEI.sql
+  unzip NCEI.sql.zip
   mysql -u [username] -p < NCEI.sql
   ```
